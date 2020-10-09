@@ -14,6 +14,8 @@
 
 - 1 -   [JS - Funções](#1-1)
   - 1.1 [Maneiras de declarar funções](#1-1)
+  - 1.2 [Parâmetros da Função](#1-2)
+  - 1.3 [](#)
 - 2 -   [JS - Arrays]()
 - 3 -   [JS - Objetos e proptypes]()
 - 4 -   [JS - Classes]()
@@ -96,6 +98,73 @@ const obj = {
 obj.say();
 ```
 > O JavaScript já reconhece say como um método.
+
+[Voltar para o índice](#i)
+****
+
+## <a name="1-2">Parâmetros da Função</a>
+
+### Arguments:
+
+```js
+function test() {
+  let total = 0;
+  for (let argumento of arguments) {
+    total += argumento;
+  }
+}
+
+test(1, 2, 3, 4);
+```
+> 1, 2 , 3, 4 foram para o array **arguments**.  
+> Nesse caso teremos a soma total dos números passado sem utilizar de parâmetros na função.  
+> Vale lembra que esse tipo de feito não funciona em arrow functions. 
+
+### Parâmetros sobrando:
+
+```js
+function test(a, b, c, d) {
+  console.log(a, b, c, d);
+}
+
+test(1, 2);
+```
+> **c** e **d** terão o valor de *undefined*.
+
+### Valores padrões para parâmetros:
+
+```js
+function test(a, b = 2) {
+  console.log(a + b);
+}
+
+test(1);
+```
+
+### Pulando definição de valores de parâmetros:
+
+```js
+function test(a, b = 2, c) {
+  console.log(a + b + c);
+}
+
+test(1, undefined, 1);
+```
+> **b** receberá o valor padrão de 2.  
+> Esse é o único jeito de "pular". Null será lido como 0. 
+
+### Rest Operator como parâmetros
+
+```js
+function test(operador, ...numeros) {
+  console.log(a + b);
+}
+
+test('+', 10, 15, 20);
+```
+> Todo o resto após '+' será atribuído a um array.
+
+
 
 [Voltar para o índice](#i)
 ****
