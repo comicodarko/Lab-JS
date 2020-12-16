@@ -15,7 +15,8 @@
 - 1 -   [JS - Funções](#1-1)
   - 1.1 [Maneiras de declarar funções](#1-1)
   - 1.2 [Parâmetros da Função](#1-2)
-  - 1.3 [](#)
+  - 1.3 [Retorno da Função](#1-3)
+  - 1.4 [Escopo Léxico](#1-4)
 - 2 -   [JS - Arrays]()
 - 3 -   [JS - Objetos e proptypes]()
 - 4 -   [JS - Classes]()
@@ -164,7 +165,116 @@ test('+', 10, 15, 20);
 ```
 > Todo o resto após '+' será atribuído a um array.
 
+[Voltar para o índice](#i)
+****
 
+## <a name="1-3">Retorno da Função</a>
+
+**return** - Retorna um valor - Termina a função.  
+
+```js
+  function createPerson(name, age) {
+    return { name, age }
+  }
+
+  const p1 = createPerson('Fábio', 20);
+  const p2 = {
+    name: 'Fábio2',
+    age: 20
+  }
+```
+
+
+Funções sem retorno (alert(), por exemplo), retornam undefined.
+
+### **Retornando uma função (sem executar)**
+
+```js
+function func1(bla1) {
+  function func2(bla2) {
+    return bla1 + bla2;
+  }
+  return func2
+}
+
+const soma = func1(1);
+// soma guarda uma função e não um retorno.
+soma(2);
+// 1+2=3
+```
+> Sim, o parâmetro da função 1 está sendo usado na função 2...   
+
+### **Onde isso é util?** 
+
+duplicar, triplicar, quadriplicar...
+
+```js
+function duplica(n) {
+  return n * 2;
+}
+
+function triplica(n) {
+  return n * 3;
+}
+
+function quadriplica(n) {
+  return n * 4;
+}
+```
+
+Facilitando:
+
+```js
+function createMultiplier(multiplier) {
+  return function(n) {
+    return n * multiplier;
+  }
+}
+const duplica = createMultiplier(2);
+const triplica = createMultiplier(3);
+const quadriplica = createMultiplier(4);
+```
+
+### **Escopo Léxico**
+
+A função conhece: 
+- local onde ela foi declarada
+- tudo declarado dentro dela
+- vizinhos
+
+```js
+const name = 'José';
+
+function sayName() {
+  const name = 'Fábio';
+  console.log(name);
+}
+
+sayName();
+```
+> Nesse caso será falado "Fábio", caso não existisse, seria falado "José".
+
+### **Porém:**
+
+```js
+const name = 'José';
+
+function sayName() {
+  console.log(name);
+}
+
+function useSayName() {
+  const name = 'Fábio';
+  sayName();
+}
+
+useSayName();
+```
+
+> Será falado 'José' por conta do contexto léxico.
+
+[Voltar para o índice](#i)
+****
 
 [Voltar para o índice](#i)
 ****
