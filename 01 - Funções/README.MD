@@ -16,7 +16,7 @@
   - 1.1 [Maneiras de declarar funções](#1-1)
   - 1.2 [Parâmetros da Função](#1-2)
   - 1.3 [Retorno da Função](#1-3)
-  - 1.4 [Escopo Léxico](#1-4)
+  - 1.4 [Closures](#1-4)
 - 2 -   [JS - Arrays]()
 - 3 -   [JS - Objetos e proptypes]()
 - 4 -   [JS - Classes]()
@@ -273,8 +273,28 @@ useSayName();
 
 > Será falado 'José' por conta do contexto léxico.
 
+### **Closures**
+
+Estão fortemente relacionados ao escopo léxico da função.
+
+```js
+function returnFunction() {
+  const name = 'Fábio';
+  return function() [
+    return name;
+  ]
+}
+
+const func = returnFunction();
+```
+
+Closure é a habilidade da de acessar eu escopo léxico.
+
+> A função anônima tem 3 escopos, o global, o local onde foi declarada e por fim o closure (returnFunction).
+
 [Voltar para o índice](#i)
 ****
+
 
 [Voltar para o índice](#i)
 ****
