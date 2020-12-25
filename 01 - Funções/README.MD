@@ -13,10 +13,10 @@
 ## <a name="i">:robot: Índice</a>
 
 - 1 -   [JS - Funções](#1-1)
-  - 1.1 [Maneiras de declarar funções](#1-1)
+  - 1.1 [Maneiras de declarar funções](#1-1)6
   - 1.2 [Parâmetros da Função](#1-2)
   - 1.3 [Retorno da Função](#1-3)
-  - 1.4 [Closures](#1-4)
+  - 1.4 [Funções de callback](#1-4)
 - 2 -   [JS - Arrays]()
 - 3 -   [JS - Objetos e proptypes]()
 - 4 -   [JS - Classes]()
@@ -295,6 +295,84 @@ Closure é a habilidade da de acessar eu escopo léxico.
 [Voltar para o índice](#i)
 ****
 
+
+## <a name="1-4">Funções de callback</a>
+
+São funções que são executadas quando uma ação ocorre.
+
+```js
+function f1() {
+  console.log('f1');
+}
+
+function f2() {
+  console.log('f2');
+}
+
+function f3() {
+  console.log('f3');
+}
+
+f1();
+f2();
+f3();
+```
+
+Precisamos fazer coisas que não podemos controlar o tempo de duração. Por exemplo chamadas a uma API, no exemplo acima não o fator tempo não é aplicado, porém se fosse:
+
+```js
+function f1(callback) {
+  console.log('f1');
+  if(callback) callback();
+}
+
+function f2(callback) {
+  console.log('f2');
+  if(callback) callback();
+}
+
+function f3(callback) {
+  console.log('f3');
+  if(callback) callback();
+}
+
+f1(function() {
+  f2(function() {
+    f3()
+  })
+});
+```
+
+> Sendo assim foi criado uma ordem. Porém para fugir desse "callback hell" é necessário algumas mudanças.
+
+```js
+function f1(callback) {
+  console.log('f1');
+  if(callback) callback();
+}
+
+function f2(callback) {
+  console.log('f2');
+  if(callback) callback();
+}
+
+function f3(callback) {
+  console.log('f3');
+  if(callback) callback();
+}
+
+f1(f1Callback)
+
+function f1Callback() {
+  f2(f2Callback);
+}
+
+function f2Callback() {
+  f3();
+}
+```
+
+Uma solução melhor é usar com promises que será trabalhado melhor no futuro.
 
 [Voltar para o índice](#i)
 ****
